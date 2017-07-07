@@ -9,7 +9,12 @@ void tearDown(void)
 {
 }
 
-void test_trietree_NeedToImplement(void)
+void test_trietree(void)
 {
-    TEST_IGNORE_MESSAGE("Need to Implement trietree");
+  char *result;
+  char arraySTR[] = "HELLO W33lD";
+  result = convertToLowerCase(arraySTR);
+  //result = convertToLowerCase("HELLOWORLD");
+  
+  TEST_ASSERT_EQUAL_STRING("hello w33ld",result);
 }
