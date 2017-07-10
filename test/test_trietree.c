@@ -12,9 +12,7 @@ void tearDown(void)
 void test_trietree(void)
 {
   char *result;
-  char arraySTR[] = "HELLO W33lD";
-  result = convertToLowerCase(arraySTR);
-  //result = convertToLowerCase("HELLOWORLD");
+  result = convertToLowerCase("HELLO W33lD");
   
   TEST_ASSERT_EQUAL_STRING("hello w33ld",result);
 }

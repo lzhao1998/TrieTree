@@ -4,6 +4,7 @@
 typedef struct Trie Trie;
 typedef struct LinkedList LinkedList;
 
+
 struct Trie
 {
   char *name;
@@ -11,10 +12,11 @@ struct Trie
   char *definition;
 };
 
+
 struct LinkedList
 {
-  Trie *head;
-  Trie *tail;
+  Trie *parent;
+  Trie *child;
   int branch;
 };
 
