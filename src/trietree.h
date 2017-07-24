@@ -26,9 +26,11 @@ struct Trie
 };
 */
 
-void createTrie(Trie **root);
-void buildDictionary(Trie **root, char *name, char *definition);
+void buildDictionary(Trie **root);
+void addDictionary(Trie **root, char *name, char *definition);
 char *convertToLowerCase(char *name);
 char *searchDictionary(Trie *root, char *name);
 Trie *createBranch(char* name, char* definition);
+int findFirstIndexOfNoneSameChar(char* str1, char* str2);
+char *createSubString(char *strName,int startIndex, int length);
 #endif // _TRIETREE_H
