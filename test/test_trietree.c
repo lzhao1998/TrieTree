@@ -14,13 +14,40 @@ void test_trietree_lowercase(void)
   TEST_ASSERT_EQUAL_STRING("hello world!",result);
 }
 
-void test_1st_node(void)
+void test_only_1_node(void)
 {
-  Trie *root;
+  TrieNode *root;
   buildDictionary(&root);
   
-  addDictionary(&root,"HELLO", "hi to everyone");
-  addDictionary(&root,"bye", "byebye");
+  addDictionary(&root,"hey", "hi to everyone");
+}
+
+void test_1st_node(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"music", "can be song,melody");
+  addDictionary(&root,"sock", "just a sock");
+}
+
+void test_listAdd_function(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+  listAdd(&root,"hi","hhh",1);
+  listAdd(&root,"hey","ad",1);
+  listAdd(&root,"hooo","hasdh",2);
+  listAdd(&root,"world","asqwgh",3);
+}
+
+void test_dictionary(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"determine", "de");
+  addDictionary(&root,"determination", "zz...");
 }
 
 void test_find_1st_Index_of_None_Same_Char_tone_toe(void)

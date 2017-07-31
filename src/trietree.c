@@ -14,13 +14,11 @@ char *convertToLowerCase(char *name) //convert all words in lowercase
   char *buffer;
   buffer = (char*)malloc(strlen(name)+1);
   strcpy(buffer,name); 
-  //printf("before: %s\n",buffer);
   while(buffer[i] != '\0')
   {
     buffer[i] = tolower(buffer[i]);
     ++i;
   }
-  //printf("after:%s\n\n",buffer);
   return buffer;
   free(buffer);
 }
@@ -28,9 +26,6 @@ char *convertToLowerCase(char *name) //convert all words in lowercase
 int findFirstIndexOfNoneSameChar(char* str1, char* str2)
 {
   int i = 0;
-  //printf("str1: %s\n",str1);
-  //printf("str2: %s\n",str2);
-
   while(str1[i] == str2[i])
   {
     i++;
@@ -42,10 +37,8 @@ char *createSubString(char *strName,int startIndex, int length)
 {
   CEXCEPTION_T ex;
   char* buffer;
-  //printf("input subString:%s \n",strName);
   int j = 0;
   int a = strlen(strName);
-  buffer = (char*)malloc(length + 1);
   
   Try
   {
@@ -54,16 +47,16 @@ char *createSubString(char *strName,int startIndex, int length)
   }
   Catch(ex)
   {
-    //printf("Error!!\n");
+    printf("Error!!\n");
     return NULL;
   }
   
+  buffer = (char*)malloc(length + 1);
   while(j != length+1)
   {
    if(j < length && length != 0)
     {
       buffer[j] = strName[startIndex];
-      //printf("Inserting : %c\n",buffer[j]);
       startIndex++;
       j++;
     }
@@ -74,26 +67,24 @@ char *createSubString(char *strName,int startIndex, int length)
     }
   }
   return buffer;
-  free(buffer);
 }
 
-void buildDictionary(Trie **root)
+void buildDictionary(TrieNode **root)
 {
   *root = createBranch(NULL,NULL);
 }
 
-Trie *createBranch(char* name, char* definition)
+TrieNode *createBranch(char* name, char* definition)
 {
-  Trie *branch = NULL; //start create the trie and all value is NULL
-  branch = (Trie*)malloc(sizeof(Trie)); //let branch hv same size as trie
+  TrieNode *branch = NULL; //start create the trie and all value is NULL
+  branch = (TrieNode*)malloc(sizeof(TrieNode)); //let branch hv same size as trie
   branch->name = name;
   branch->definition = definition;
-  branch->next = NULL;
-  branch->previous = NULL; //next and pervious is for left and right
-  branch->parent = NULL;
-  branch->child = NULL;   //parent and child is for up and down
+  branch->list->next = NULL;
+  branch->list->previous = NULL; //next and pervious is for left and right
+  branch->list->child = NULL;   //parent and child is for up and down
   return branch;
-  
+
   /*        parent(prev) ---------parent(next)  
               |                     |       |
            child             child(prev) child(next)
@@ -102,11 +93,16 @@ Trie *createBranch(char* name, char* definition)
   */
 } 
 
-void addDictionary(Trie **root, char *name, char *definition) // MAIN 
+void addDictionary(TrieNode **root, char *name, char *definition) // MAIN 
 {
   CEXCEPTION_T ex;
   char *nameInLowercase;
   nameInLowercase = convertToLowerCase(name);
+ // printf("\noutput for lowercase: %s\n",nameInLowercase);
+  TrieNode *word = NULL;
+  TrieNode *pWord = NULL;
+  word = (TrieNode*)malloc(sizeof(TrieNode));
+  pWord = (TrieNode*)malloc(sizeof(TrieNode));
   
   /*
   Catch(ex) // for checking spacebar and numeric
@@ -114,9 +110,6 @@ void addDictionary(Trie **root, char *name, char *definition) // MAIN
     printf("ERROR!! DONT HAVE ANY NUMERIC AND SPACEBAR!!\n");
   }
   */
-  
-  printf("\noutput for lowercase: %s\n",nameInLowercase);
-  Trie *word = NULL;
   
   if(*root == NULL) //if no insert any word
   {
@@ -129,48 +122,94 @@ void addDictionary(Trie **root, char *name, char *definition) // MAIN
                |
            word(child)
   */
+    printf("......................................\n");
     printf("insert word:%s\n", nameInLowercase);
     word = createBranch(nameInLowercase, definition);
     
   //for the 1st node
-  if(word == NULL && (*root)->child == NULL)
+  if((*root)->list->child == NULL)
   {
-    word = (*root)->child;
+    (*root)->list->child = word;
     printf("Inserting 1st node: %s\n",word->name);
     printf("Inserting 1st node definition: %s\n",word->definition);
     return;
   }
+  // more than 1 node
     printf("another node? yes!! \n");
     printf("name : %s\n",word->name);
     printf("def : %s\n", word->definition);
-    int i = findFirstIndexOfNoneSameChar((word->name), (*root)->child->name); //PROBLEM HERE
+    int i = findFirstIndexOfNoneSameChar(word->name, (*root)->child->name);
     printf("%d\n",i);
-    return;
-  //for 2nd or more node
-  /*while(*result != '\0')
-  {
-    if(*result == (word->name))
-    {
-      printf("\n",result);
-      result++;
-    }
-    word->definition = NULL;
-    char *buffer1 = (char*)malloc(strlen(word->name)-i);
-    strcpy(buffer1,(word->name)+i);
-    word->child = createBranch(buffer1,definition);
     
-    word = word->child;   //now is in child of the parent
-    char *buffer2 = (char*)malloc(strlen(result)-i);
-    strcpy(buffer2,result+i);
-    word->next = createBranch(buffer2,definition);
-    word->next->parent = word->parent;
-    word->next->previous = word;
-  }*/
-  
+    
+    char *buffer1,*buffer2,*buffer3; //buffer 1 = same word , buffer 2and3 = not same, 2 is 2nd node, 3 is exist in root->child
+    buffer1 = createSubString(word->name, 0, i+1);
+    buffer2 = createSubString(word->name, i+1, strlen(word->name)-i);
+    buffer3 = createSubString((*root)->child->name, i+1, strlen((*root)->child->name)-i);
+    printf("buffer1 :%s\n",buffer1);
+    printf("buffer2 :%s\n",buffer2);
+    printf("buffer3 :%s\n",buffer3);
+    
+    if(buffer1 == NULL)
+    {
+      pWord = (*root)->child;
+      while(pWord != NULL)
+      {
+        pWord = pWord->next;
+      }
+      pWord = createBranch(buffer2, word->definition);
+      printf("pWord name:%s\n",pWord->name);
+      printf("pWord definiton:%s\n",pWord->definition);
+      printf("1st node name and def:%s %s\n",(*root)->child->name,(*root)->child->definition);
+      free(buffer1);
+      free(buffer2);
+      free(buffer3);
+    }
+    pWord =(*root)->child;
+    while(pWord)
+    //addDictionary(&(pWord),buffer1,NULL);
+    //addDictionary(&(pWord)->child,buffer2,word->definition);
+    //addDictionary(&(pWord)->child,buffer3,pWord->definition);
+    
+    
+    return;
 }
 
+void listAdd(TrieNode *root, char *name, char *definition, int i)
+{
+  if(root->name != NULL)
+  {
+    root = root->next;
+  }
+  if(name == NULL)
+  {
+    root->list->next = root;
+    root->name = name;
+    root->definition = definition;
+  }
+  else
+  {
+    if(i == 1)
+    {
+      root->name = name;
+      root->definition = definition;
+    }
+    else if(i == 2)
+    {
+      root->list->child = root;
+      root->name = name;
+      root->definition = definition;
+    }
+    else
+    {
+      root->list->child->next = root;
+      root->name = name;
+      root->definition = definition;
+    }
+  }
+}
 
-char *searchDictionary(Trie *tree, char *name)
+char *searchDictionary(TrieNode *tree, char *name)
 {
   
 }
