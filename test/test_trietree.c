@@ -6,6 +6,69 @@
 void setUp(void){}
 void tearDown(void){}
 
+/*void test_wordsd_return_wordsd(void)
+{
+	char *result;
+	result = checkIsWord("wordsd");
+	TEST_ASSERT_EQUAL_STRING("wordsd",result);
+}
+
+void test_123word_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord("123word");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_wo123rd_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord("wo123rd");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_12345_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord("12345");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_word123_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord("word123");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_NULL_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord(" ");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_hello_world_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord("hello world");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_w__sd_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord("wo!?sd");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_word_return_word(void)
+{
+	char *result;
+	result = checkIsWord("word");
+	TEST_ASSERT_EQUAL_STRING("word",result);
+}
+
 void test_trietree_lowercase(void)
 {
   char *result;
@@ -14,40 +77,28 @@ void test_trietree_lowercase(void)
   TEST_ASSERT_EQUAL_STRING("hello world!",result);
 }
 
-void test_only_1_node(void)
+void test_TrieTree_to_trietree(void)
 {
-  TrieNode *root;
-  buildDictionary(&root);
+  char *result;
+  result = convertToLowerCase("TrieTree");
   
-  addDictionary(&root,"hey", "hi to everyone");
+  TEST_ASSERT_EQUAL_STRING("trietree",result);
 }
 
-void test_1st_node(void)
+void test_aDFg_to_adfg(void)
 {
-  TrieNode *root;
-  buildDictionary(&root);
+  char *result;
+  result = convertToLowerCase("aDFg");
   
-  addDictionary(&root,"music", "can be song,melody");
-  addDictionary(&root,"sock", "just a sock");
+  TEST_ASSERT_EQUAL_STRING("adfg",result);
 }
 
-void test_listAdd_function(void)
+void test_Hello123_to_hello123(void)
 {
-  TrieNode *root;
-  buildDictionary(&root);
-  listAdd(&root,"hi","hhh",1);
-  listAdd(&root,"hey","ad",1);
-  listAdd(&root,"hooo","hasdh",2);
-  listAdd(&root,"world","asqwgh",3);
-}
-
-void test_dictionary(void)
-{
-  TrieNode *root;
-  buildDictionary(&root);
+  char *result;
+  result = convertToLowerCase("Hello123");
   
-  addDictionary(&root,"determine", "de");
-  addDictionary(&root,"determination", "zz...");
+  TEST_ASSERT_EQUAL_STRING("hello123",result);
 }
 
 void test_find_1st_Index_of_None_Same_Char_tone_toe(void)
@@ -124,4 +175,44 @@ void test_get_NULL_from_hello_when_start2_length0 (void)
   result = createSubString("hello", 2, 0);
   
   TEST_ASSERT_EQUAL_STRING(NULL,result);
+}*/
+
+void test_only_1_node(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"hey", "hi to everyone");
 }
+
+void test_insert_2_node(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"music", "can be song,melody");
+  addDictionary(&root,"sock", "just a sock");
+}
+
+/*-------------------might not use------------------------
+void test_listAdd_function(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+  listAdd(&root,"hi","hhh",1);
+  listAdd(&root,"hey","ad",1);
+  listAdd(&root,"hooo","hasdh",2);
+  listAdd(&root,"world","asqwgh",3);
+}
+
+void test_dictionary(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"determine", "de");
+  addDictionary(&root,"determination", "zz...");
+}
+
+------------------------------------------------------*/
+

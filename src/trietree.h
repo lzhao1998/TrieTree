@@ -18,10 +18,24 @@ struct TrieNode
   LinkedList list;
 };
 
+/*
+struct LinkedList
+{
+  LinkedList *next;
+  LinkedList *previous;
+  LinkedList *child;
+  TrieNode currentNode;
+};
+
+struct TrieNode
+{
+  char *name;
+  char *definition;
+};
+*/
 
 
-
-
+char *checkIsWord(char *name);
 void buildDictionary(TrieNode **root);
 void addDictionary(TrieNode **root, char *name, char *definition);
 char *convertToLowerCase(char *name);
