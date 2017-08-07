@@ -55,10 +55,17 @@ void test_hello_world_return_NULL(void)
 	TEST_ASSERT_EQUAL_STRING(NULL,result);
 }
 
-void test_w__sd_return_NULL(void)
+void test_w_specialChar_sd_return_NULL(void)
 {
 	char *result;
 	result = checkIsWord("wo!?sd");
+	TEST_ASSERT_EQUAL_STRING(NULL,result);
+}
+
+void test_NULL_in_checkIsWord_return_NULL(void)
+{
+	char *result;
+	result = checkIsWord(NULL);
 	TEST_ASSERT_EQUAL_STRING(NULL,result);
 }
 
@@ -99,6 +106,14 @@ void test_Hello123_to_hello123(void)
   result = convertToLowerCase("Hello123");
   
   TEST_ASSERT_EQUAL_STRING("hello123",result);
+}
+
+void test_NULL_to_NULL_in_convertLowercase(void)
+{
+  char *result;
+  result = convertToLowerCase(NULL);
+  
+  TEST_ASSERT_EQUAL_STRING(NULL,result);
 }
 
 void test_find_1st_Index_of_None_Same_Char_tone_toe(void)
@@ -180,6 +195,7 @@ void test_get_NULL_from_hello_when_start2_length0 (void)
 void test_only_1_node(void)
 {
   TrieNode *root;
+  //LinkedList *root;
   buildDictionary(&root);
   
   addDictionary(&root,"hey", "hi to everyone");
@@ -188,10 +204,43 @@ void test_only_1_node(void)
 void test_insert_2_node(void)
 {
   TrieNode *root;
+  //LinkedList *root;
   buildDictionary(&root);
   
   addDictionary(&root,"music", "can be song,melody");
   addDictionary(&root,"sock", "just a sock");
+  addDictionary(&root,"toe", "kaki punya finger");
+}
+
+void test_insert_2_node_with_same_char_infront(void)
+{
+  TrieNode *root;
+  //LinkedList *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"music", "can be song,melody");
+  addDictionary(&root,"must", "should be do or need to do");
+}
+
+void test_insert_2_node_with_same_word(void)
+{
+  TrieNode *root;
+  //LinkedList *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"music", "aaa");
+  addDictionary(&root,"music", "bbbb");
+}
+
+void test_insert_3_node_should_contain_3_child(void)
+{
+  TrieNode *root;
+  //LinkedList *root;
+  buildDictionary(&root);
+  
+  addDictionary(&root,"mus", "mus?");
+  //addDictionary(&root,"music", "should be do or need to do");
+  addDictionary(&root,"musication", "people who play music");
 }
 
 /*-------------------might not use------------------------
