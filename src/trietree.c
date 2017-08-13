@@ -392,13 +392,15 @@ void addDictionary(LinkedList **root, char *name, char *definition) // TRY ONLY
 }*/
 //////END TRY//////
 
-void listAdd(TrieNode **root, char *name, char *definition, int i)
+void listAdd(TrieNode **root, char *name, char *definition)
 {
   TrieNode *word = NULL;
   word = (TrieNode*)malloc(sizeof(TrieNode));
   word = createBranch(name, definition);
   word->name = name;
   word->definition = definition;
+	printf("name is: %s\n", word->name);
+	printf("def is: %s\n", word->definition);
   return;
 }
 /*
@@ -407,11 +409,57 @@ void listRemove(TrieNode **root)
   TrieNode *word = NULL;
   word = (TrieNode*)malloc(sizeof(TrieNode));
   word = root;
-  word->name = NULL;
-  word->definition = NULL;
+  free(word->name);
+  free(word->definition);
+	return;
 }*/
 
-char *searchDictionary(TrieNode *tree, char *name)
+char *searchDictionary(TrieNode *root, char *name)
 {
-  
+	TrieNode *word = NULL;
+  word = (TrieNode*)malloc(sizeof(TrieNode));
+	word = (*root)->list.child;
+	//check word to be search is an actual a word or not
+	char *wordSearch = convertToLowerCase(name);
+  if(wordSearch == NULL)
+  {
+	  printf("THIS IS NOT A PROPER WORD!!\n");
+	  return NULL;
+  }
+	int i;
+	//check is there any match word in it
+  if((i = findFirstIndexOfNoneSameChar(word->name, wordSearch)) < 0 &&word != NULL) 
+	{ 
+    word = word->list.next;
+	}
+	//return NULL if there is not such word in dictionary
+	if(word == NULL) 
+	{
+		printf("ERROR 404!! WORD NOT FOUND!!\n");
+		return NULL;
+	}
+	//buffer1 and buffer2 is word to be search
+	//buffer3 and buffer4 is the word in dictionary
+	char *buffer1,*buffer2,*buffer3,*buffer4;
+	buffer1 = createSubString(wordSearch, 0, i+1);
+	buffer2 = createSubString(wordSearch, i+1, strlen(name)-i);
+	buffer3 = createSubString(word->name, 0, i+1);
+	buffer4 = createSubString(word->name, i+1, strlen(word->name)-i);
+	//if there is not fully match between word in dictionary and word to search
+	if(buffer4 != NULL)
+	{
+		free(buffer1);free(buffer2);free(buffer3);free(buffer4);
+		printf("WORD NOT FOUND!!\n");
+		return NULL;
+	}
+	//if there are same
+	if(buffer4 == NULL && buffer2 == NULL)
+	{
+		prinft("WORD FOUND!!! :3 \n");
+		printf("Definition : %s \n",word->definition);
+		free(buffer1);free(buffer2);free(buffer3);free(buffer4);
+		return (word->definition);
+	}
+	searchDictionary(&word, buffer2);
+	free(buffer1);free(buffer2);free(buffer3);free(buffer4);
 }

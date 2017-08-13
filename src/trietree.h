@@ -7,7 +7,6 @@ typedef struct LinkedList LinkedList;
 struct LinkedList
 {
   TrieNode *next;
- // TrieNode *previous;
   TrieNode *child;
 };
 
@@ -42,6 +41,7 @@ void buildDictionary(LinkedList **root);
 TrieNode *createBranch(char* name, char* definition);
 void buildDictionary(TrieNode **root);
 void addDictionary(TrieNode **root, char *name, char *definition);
+void listAdd(TrieNode **root, char *name, char *definition);
 char *checkIsWord(char *name);
 char *convertToLowerCase(char *name);
 char *searchDictionary(TrieNode *root, char *name);
