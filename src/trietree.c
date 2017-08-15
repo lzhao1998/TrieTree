@@ -70,7 +70,7 @@ char *createSubString(char *strName,int startIndex, int length)
 
   if(a < startIndex || length <= 0 || strName == NULL)
   {
-    printf("SUBSTRING ERROR!!\n");
+    printf("SUBSTRING ERROR!! IT IS NULL!!\n");
     return NULL;
   }
 
@@ -119,7 +119,7 @@ TrieNode *createBranch(char* name, char* definition)
 }
 
 //adding word into dictionary
-void addDictionary(TrieNode **root, char *name, char *definition) // MAIN
+void addDictionary(TrieNode **root, char *name, char *definition) // MAIN FUNCTION
 {
   char *nameInLowercase;
   nameInLowercase = convertToLowerCase(name);
@@ -153,8 +153,6 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN
   if((*root)->list.child == NULL)
   {
     (*root)->list.child = word;
-    printf("Inserting 1st node: %s\n",word->name);
-    printf("Inserting 1st node definition: %s\n",word->definition);
     return;
   }
 
@@ -173,7 +171,6 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN
 
   if(pWord == NULL || i < 0)  //PROBLEM STILL HAVENT FULLY SOLVE FOR THIS IF STATEMENT
   {
-    printf("put %s into NULL pWord\n",word->name);
     if(curr->list.next == NULL)
     {
       listAdd(&pWord,word->name,word->definition);
@@ -188,8 +185,7 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN
   }
 
   i = findFirstIndexOfNoneSameChar(word->name, pWord->name);
-  printf("i is : %d\n",i);
-  printf("pword name :%s\n",pWord->name);
+
   //buffer 1 = same word , buffer 2and3 = not same, 2 is 2nd node, 3 is exist in root->child
   //          buffer1
   //          /     \
@@ -198,19 +194,17 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN
   buffer1 = createSubString(word->name, 0, i+1);
   buffer2 = createSubString(pWord->name, i+1, strlen(pWord->name)-(i+1));
   buffer3 = createSubString(word->name, i+1, strlen(word->name)-(i+1));
-  printf("buffer1 :%s\n",buffer1);
+	//printf use to see the program working or not
+  /*printf("buffer1 :%s\n",buffer1);
   printf("buffer2 :%s\n",buffer2);
-  printf("buffer3 :%s\n",buffer3);
+  printf("buffer3 :%s\n",buffer3);*/
   char *tempDefPWord = pWord->definition;
   char *tempDefWord = word->definition;
 
   if(pWord->list.child != NULL)  //PROBLEM!!! WILL BE SOLVED LATER
   {
-    printf("yo\n");
-    printf("child name is: %s\n",pWord->list.child->name);
     j = findFirstIndexOfNoneSameChar(buffer2, pWord->list.child->name);
     k = findFirstIndexOfNoneSameChar(buffer3, pWord->list.child->name);
-    printf("j is :%d    k is :%d\n",j,k);
     if(j > 0)
     {
       addDictionary(&pWord,buffer2,tempDefPWord);
@@ -228,38 +222,30 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN
   else if(buffer2 != NULL && buffer3 != NULL)
   {
     listFree(&pWord);
-    printf("HERE all not null\n");
     listAdd(&pWord,buffer1,NULL);
-    printf("pWord name is: %s\n",pWord->name);
     addDictionary(&pWord,buffer2,tempDefPWord);
     addDictionary(&pWord,buffer3,tempDefWord);
   }
   else if(buffer2 == NULL && buffer3 != NULL)
   {
-    printf("buff2 NULL\n");
     listFree(&pWord);
     listAdd(&pWord,buffer1,tempDefPWord);
     addDictionary(&pWord,buffer3,tempDefWord);
   }
   else if(buffer2 != NULL && buffer3 == NULL)
   {
-    printf("buff3 NULL\n");
     listFree(&pWord);
     listAdd(&pWord,buffer1,tempDefWord);
     addDictionary(&pWord,buffer2,tempDefPWord);
   }
   else
   {
-    printf("HERE eles\n");
     listFree(&pWord);
     listAdd(&pWord,buffer1,NULL);
     addDictionary(&pWord,buffer2,tempDefWord);
     addDictionary(&pWord,buffer3,tempDefWord);
   }
-    //free(buffer1);free(buffer2);free(buffer3);
-    printf("%s      %s\n",pWord->name,pWord->definition);
     (*root)->list.child = pWord;
-    //free(pWord);
     return;
 }
 
@@ -307,11 +293,10 @@ char *searchDictionary(TrieNode **root, char *name)
 	}
 
   i = findFirstIndexOfNoneSameChar(word->name, wordSearch);
-  printf("For search\nI is : %d\n",i);
 	//return NULL if there is not such word in dictionary
 	if(word == NULL)
 	{
-		printf("ERROR 404!! WORD NOT FOUND!!\n");
+		printf("WORD NOT FOUND!!\n");
 		return NULL;
 	}
 	//buffer1 and buffer2 is word to be search
@@ -322,10 +307,11 @@ char *searchDictionary(TrieNode **root, char *name)
 	buffer3 = createSubString(word->name, 0, i+1);
 	buffer4 = createSubString(word->name, i+1, strlen(word->name)-(i+1));
 
-  printf("buffer1 : %s\n",buffer1);
+	//printf use to see whether program is working or not
+  /*printf("buffer1 : %s\n",buffer1);
   printf("buffer2 : %s\n",buffer2);
   printf("buffer3 : %s\n",buffer3);
-  printf("buffer4 : %s\n",buffer4);
+  printf("buffer4 : %s\n",buffer4);*/
 
 	//if there is not fully match between word in dictionary and word to search
 	if(buffer4 != NULL)

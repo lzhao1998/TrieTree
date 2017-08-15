@@ -114,7 +114,9 @@ void test_insert_3_nodes_which_is_mus_music_musician(void)
   TEST_ASSERT_EQUAL_STRING("ian",root->list.child->list.child->list.child->name);
   TEST_ASSERT_EQUAL_STRING("a person who plays a musical instrument",root->list.child->list.child->list.child->definition);
 }
-/*
+
+// PROBLEM WHEN START TEST HERE
+//will be solve....
 void test_insert_3_nodes_apple_must_tree(void)
 {
   TrieNode *root;
@@ -148,4 +150,4 @@ void test_insert_3_nodes_music_apple_application(void)
   TEST_ASSERT_EQUAL_STRING("ication",root->list.child->list.next->list.child->list.next->name);
   TEST_ASSERT_EQUAL_STRING("the act of putting to a special use or purpose",root->list.child->list.next->list.child->list.next->definition);
 }
-*/
+
