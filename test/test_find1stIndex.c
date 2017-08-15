@@ -52,5 +52,20 @@ void test_find_1st_Index_of_None_Same_Char_information_informative(void)
   TEST_ASSERT_EQUAL(8,i);
 }
 
+void test_find_1st_Index_of_None_Same_Char_null_informative(void)
+{
+  int i = findFirstIndexOfNoneSameChar(NULL,"informative");
+  TEST_ASSERT_EQUAL(-1,i);
+}
 
+void test_find_1st_Index_of_None_Same_Char_information_NULL(void)
+{
+  int i = findFirstIndexOfNoneSameChar("information",NULL);
+  TEST_ASSERT_EQUAL(-1,i);
+}
 
+void test_find_1st_Index_of_None_Same_Char_NULL_NULL(void)
+{
+  int i = findFirstIndexOfNoneSameChar(NULL,NULL);
+  TEST_ASSERT_EQUAL(-1,i);
+}

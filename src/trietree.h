@@ -28,6 +28,6 @@ TrieNode *createBranch(char* name, char* definition);
 void addDictionary(TrieNode **root, char *name, char *definition);
 void listAdd(TrieNode **root, char *name, char *definition);
 void listFree(TrieNode **root);
-char *searchDictionary(TrieNode *root, char *name);
+char *searchDictionary(TrieNode **root, char *name);
 
 #endif // _TRIETREE_H

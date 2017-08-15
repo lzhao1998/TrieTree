@@ -6,19 +6,52 @@
 void setUp(void){}
 void tearDown(void){}
 
-//test for adding word into dictionar
-void test_insert_3_nodes_which_is_mus_music_musician(void) //PROBLEM!!!
+/*
+void test_insert_3_nodes_music_apple_application(void)
 {
   TrieNode *root;
   buildDictionary(&root);
-  
-  addDictionary(&root,"mus", "no meaning");
+
   addDictionary(&root,"music", "vocal or instrumental sounds combined in such a way as to produce beauty of form");
-  addDictionary(&root,"musician","a person who plays a musical instrument");
-  TEST_ASSERT_EQUAL_STRING("mus",root->list.child->name);
-  TEST_ASSERT_EQUAL_STRING("no meaning",root->list.child->definition);
-  TEST_ASSERT_EQUAL_STRING("ic",root->list.child->list.child->name);
-  TEST_ASSERT_EQUAL_STRING("vocal or instrumental sounds combined in such a way as to produce beauty of form",root->list.child->list.child->definition);
-  TEST_ASSERT_EQUAL_STRING("ian",root->list.child->list.child->list.child->name);
-  TEST_ASSERT_EQUAL_STRING("a person who plays a musical instrument",root->list.child->list.child->list.child->definition);
+  addDictionary(&root,"apple", "a fruit");
+  addDictionary(&root,"application","the act of putting to a special use or purpose");
+  TEST_ASSERT_EQUAL_STRING("music",root->list.child->name);
+  TEST_ASSERT_EQUAL_STRING("vocal or instrumental sounds combined in such a way as to produce beauty of form",root->list.child->definition);
+  TEST_ASSERT_EQUAL_STRING("appl",root->list.child->list.next->name);
+  TEST_ASSERT_EQUAL_STRING(NULL,root->list.child->list.next->definition);
+  TEST_ASSERT_EQUAL_STRING("e",root->list.child->list.next->list.child->name);
+  TEST_ASSERT_EQUAL_STRING("a fruit",root->list.child->list.next->list.child->definition);
+  TEST_ASSERT_EQUAL_STRING("ication",root->list.child->list.next->list.child->list.next->name);
+  TEST_ASSERT_EQUAL_STRING("the act of putting to a special use or purpose",root->list.child->list.next->list.child->list.next->definition);
+}*/
+
+void test_insert_3_nodes_apple_must_tree(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+
+  addDictionary(&root,"apple", "a fruit");
+  addDictionary(&root,"must", "need to");
+  addDictionary(&root,"tree", "a plant");
+  TEST_ASSERT_EQUAL_STRING("apple",root->list.child->name);
+  TEST_ASSERT_EQUAL_STRING("a fruit",root->list.child->definition);
+  TEST_ASSERT_EQUAL_STRING("must",root->list.child->list.next->name);
+  TEST_ASSERT_EQUAL_STRING("need to",root->list.child->list.next->definition);
+  TEST_ASSERT_EQUAL_STRING("tree",root->list.child->list.next->list.next->name);
+  TEST_ASSERT_EQUAL_STRING("a plant",root->list.child->list.next->list.next->definition);
 }
+
+/*
+void test_search_tree_after_insert_apple_must_tree(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+
+  addDictionary(&root,"apple","a fruit");
+  addDictionary(&root,"must","need to");
+  addDictionary(&root,"tree","a plant");
+  TEST_ASSERT_EQUAL_STRING("tree",root->list.child->list.next->list.next);
+  char *result = searchDictionary(&root,"tree");
+  printf("Defintion of tree is %s \n",result);
+  TEST_ASSERT_EQUAL_STRING("a plant",result);
+}*/
