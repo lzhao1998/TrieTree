@@ -26,6 +26,8 @@ char *createSubString(char *strName,int startIndex, int length);
 void buildDictionary(TrieNode **root);
 TrieNode *createBranch(char* name, char* definition);
 void addDictionary(TrieNode **root, char *name, char *definition);
+void listCheckNext(TrieNode **root, char *name, char *definition);
+void listCreateSubString(TrieNode **root, char *name, char *definition);
 void listAdd(TrieNode **root, char *name, char *definition);
 void listFree(TrieNode **root);
 char *searchDictionary(TrieNode **root, char *name);
