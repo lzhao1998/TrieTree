@@ -31,5 +31,6 @@ void listCreateSubString(TrieNode **root, char *name, char *definition);
 void listAdd(TrieNode **root, char *name, char *definition);
 void listFree(TrieNode **root);
 char *searchDictionary(TrieNode **root, char *name);
+int isMatchSomeChar(char *name, char *word);
 
 #endif // _TRIETREE_H
