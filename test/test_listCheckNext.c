@@ -73,5 +73,6 @@ void test_insert_name_and_def_twice_with_same_1st_index(void)
   //printf("child2 : %s\n",root->list.child->list.next->name);
   TEST_ASSERT_EQUAL_STRING("a",root->name);
   TEST_ASSERT_EQUAL_STRING("pple",root->list.child->name);
-  TEST_ASSERT_EQUAL_STRING("nt",root->list.child->list.next->definition);
+  TEST_ASSERT_EQUAL_STRING("fruit",root->list.child->definition);
+  TEST_ASSERT_EQUAL_STRING("insect",root->list.child->list.next->definition);
 }

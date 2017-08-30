@@ -128,10 +128,10 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN FUNCTI
   {
 	  return;
   }
-  TrieNode *word = NULL;
+  //TrieNode *word = NULL;
   //TrieNode *pWord = NULL;
   //TrieNode *curr = NULL;
-  word = (TrieNode*)malloc(sizeof(TrieNode));
+  //word = (TrieNode*)malloc(sizeof(TrieNode));
   //pWord = (TrieNode*)malloc(sizeof(TrieNode));
   //curr = (TrieNode*)malloc(sizeof(TrieNode));
 
@@ -146,13 +146,14 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN FUNCTI
   //             |
   //         word(child)
 
-  word = createBranch(nameInLowercase, definition);
+  //word = createBranch(nameInLowercase, definition);
 
   //for the 1st node
   if((*root)->list.child == NULL)
   {
-    printf("inserting %s\n",word->name);
-    (*root)->list.child = word;
+    printf("inserting %s\n",nameInLowercase);
+    //(*root)->list.child = word;
+		listAdd(&(*root)->list.child,nameInLowercase,definition);
     printf("root child is : %s\n",(*root)->list.child->name);
     return;
   }
@@ -160,7 +161,7 @@ void addDictionary(TrieNode **root, char *name, char *definition) // MAIN FUNCTI
 	// more than 1 node
   printf("more than 1 node\n");
   printf("root child name: %s\n",(*root)->list.child->name);
-  listCheckNext(&(*root)->list.child, word->name, word->definition);
+  listCheckNext(&(*root)->list.child, nameInLowercase, definition);
   return;
 	/*pWord = (*root)->list.child;
   curr = (*root)->list.child;
@@ -265,17 +266,21 @@ void listCheckNext(TrieNode **root, char *name, char *definition)
 {
   TrieNode *word = NULL;
   word = (TrieNode*)malloc(sizeof(TrieNode));
-  //printf("name : %s \n", name);
-  //printf("root name: %s \n", (*root)->name);
   
-  
-  if((*root)->name == NULL)
+  if((*root)->name == NULL && findFirstIndexOfNoneSameChar(name,(*root)->name) < 0)
   {
    // if(findFirstIndexOfNoneSameChar(name,(*root)->name) < 0)
-      listAdd(&(*root),name,definition);
+   // {	
+			listAdd(&(*root),name,definition);
       return;
+	//	}
+		//else
+	//	{
+		//	printf("hi there!!\n");
+		//	return;
+		//}
   }
-  else
+  if((*root)->name != NULL)
   {
     if(findFirstIndexOfNoneSameChar(name,(*root)->name) >= 0)
     {
@@ -300,7 +305,8 @@ void listCheckNext(TrieNode **root, char *name, char *definition)
       return;
     }
   }
-  
+	printf("wtf?: %s", word->name);
+  listCreateSubString(&(*root),name,definition);
   return;
 }
 
@@ -352,7 +358,9 @@ void listCreateSubString(TrieNode **root, char *name, char *definition)
     addDictionary(&(*root),buffer3,tempInsertWord);
   }
   //free(buffer1);free(buffer2);free(buffer3);
-  (*root)->list.child = (*root);
+  //(*root)->list.child = (*root);
+   // (*root) = (*root);
+	 printf("return?\n");
     return;
   
 }

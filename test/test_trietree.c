@@ -7,6 +7,7 @@ void setUp(void){}
 void tearDown(void){}
 
 //test for adding word into dictionary
+
 void test_get_NULL_when_insert_NULL_in_dictionary(void)
 {
   TrieNode *root;
@@ -115,8 +116,7 @@ void test_insert_3_nodes_which_is_mus_music_musician(void)
   TEST_ASSERT_EQUAL_STRING("a person who plays a musical instrument",root->list.child->list.child->list.child->definition);
 }
 
-// PROBLEM WHEN START TEST HERE
-//will be solve....
+
 void test_insert_3_nodes_apple_must_tree(void)
 {
   TrieNode *root;
