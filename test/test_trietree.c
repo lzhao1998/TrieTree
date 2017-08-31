@@ -151,3 +151,43 @@ void test_insert_3_nodes_music_apple_application(void)
   TEST_ASSERT_EQUAL_STRING("the act of putting to a special use or purpose",root->list.child->list.next->list.child->list.next->definition);
 }
 
+void test_insert_4_nodes_music_apple_application_birds(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+
+  addDictionary(&root,"music", "vocal or instrumental sounds combined in such a way as to produce beauty of form");
+  addDictionary(&root,"apple", "a fruit");
+  addDictionary(&root,"application","the act of putting to a special use or purpose");
+	addDictionary(&root,"birds", "mammal animal");
+  TEST_ASSERT_EQUAL_STRING("music",root->list.child->name);
+  TEST_ASSERT_EQUAL_STRING("vocal or instrumental sounds combined in such a way as to produce beauty of form",root->list.child->definition);
+  TEST_ASSERT_EQUAL_STRING("appl",root->list.child->list.next->name);
+  TEST_ASSERT_EQUAL_STRING(NULL,root->list.child->list.next->definition);
+  TEST_ASSERT_EQUAL_STRING("e",root->list.child->list.next->list.child->name);
+  TEST_ASSERT_EQUAL_STRING("a fruit",root->list.child->list.next->list.child->definition);
+  TEST_ASSERT_EQUAL_STRING("ication",root->list.child->list.next->list.child->list.next->name);
+  TEST_ASSERT_EQUAL_STRING("the act of putting to a special use or purpose",root->list.child->list.next->list.child->list.next->definition);
+	TEST_ASSERT_EQUAL_STRING("birds",root->list.child->list.next->list.next->name);
+	TEST_ASSERT_EQUAL_STRING("mammal animal",root->list.child->list.next->list.next->definition);
+}
+
+void test_insert_3_nodes_apple_must_tree_birds_book(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+
+  addDictionary(&root,"apple", "a fruit");
+  addDictionary(&root,"must", "need to");
+  addDictionary(&root,"tree", "a plant");
+	addDictionary(&root,"birds", "mammal animal");
+	addDictionary(&root,"nemo","fish");
+  TEST_ASSERT_EQUAL_STRING("apple",root->list.child->name);
+  TEST_ASSERT_EQUAL_STRING("a fruit",root->list.child->definition);
+  TEST_ASSERT_EQUAL_STRING("must",root->list.child->list.next->name);
+  TEST_ASSERT_EQUAL_STRING("need to",root->list.child->list.next->definition);
+  TEST_ASSERT_EQUAL_STRING("tree",root->list.child->list.next->list.next->name);
+  TEST_ASSERT_EQUAL_STRING("a plant",root->list.child->list.next->list.next->definition);
+	TEST_ASSERT_EQUAL_STRING("birds",root->list.child->list.next->list.next->list.next->name);
+	TEST_ASSERT_EQUAL_STRING("nemo",root->list.child->list.next->list.next->list.next->list.next->name);
+}

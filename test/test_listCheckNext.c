@@ -5,8 +5,8 @@
 
 void setUp(void){}
 void tearDown(void){}
-/*
-void test_insert_name_and_def_once(void) //done
+
+void test_insert_name_and_def_once(void)
 {
   TrieNode *root;
   buildDictionary(&root);
@@ -59,7 +59,7 @@ void test_insert_name_and_def_four_times(void)
   TEST_ASSERT_EQUAL_STRING("plant",root->list.next->definition);
   TEST_ASSERT_EQUAL_STRING("book",root->list.next->list.next->name);
   TEST_ASSERT_EQUAL_STRING("nemo",root->list.next->list.next->list.next->name);
-}*/
+}
 
 void test_insert_name_and_def_twice_with_same_1st_index(void)
 {
@@ -68,9 +68,6 @@ void test_insert_name_and_def_twice_with_same_1st_index(void)
 
   listCheckNext(&root,"apple","fruit");
   listCheckNext(&root,"ant","insect");
-  printf("parent : %s\n",root->name);
-  printf("child1 : %s\n",root->list.child->name);
-  //printf("child2 : %s\n",root->list.child->list.next->name);
   TEST_ASSERT_EQUAL_STRING("a",root->name);
   TEST_ASSERT_EQUAL_STRING("pple",root->list.child->name);
   TEST_ASSERT_EQUAL_STRING("fruit",root->list.child->definition);

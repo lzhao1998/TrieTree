@@ -112,3 +112,20 @@ void test_search_must_after_insert_apple_tree(void)
   printf("Defintion of must is %s \n",result);
   TEST_ASSERT_EQUAL_STRING(NULL,result);
 }
+
+void test_search_tree_after_insert_apple_tree_ton_must_music_ten(void)
+{
+  TrieNode *root;
+  buildDictionary(&root);
+
+  addDictionary(&root,"apple","a fruit");
+  addDictionary(&root,"tree","plant");
+	addDictionary(&root,"ton","1000kg");
+	addDictionary(&root,"music", "vocal or instrumental sounds combined in such a way as to produce beauty of form");
+	addDictionary(&root,"must","should be");
+	addDictionary(&root,"ten","10");
+  char *result = searchDictionary(&root,"tree");
+  printf("Defintion of tree is %s \n",result);
+  TEST_ASSERT_EQUAL_STRING("plant",result);
+}
+
